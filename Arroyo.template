@@ -1,0 +1,265 @@
+record(stringin, "$(S):$(TA):$(DN):IDN") {
+  info(DESC, "Get the IDN string")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getIDN Arroyo1")
+  field(SCAN, "1 second")
+}
+
+
+record(stringin, "$(S):$(TA):$(DN):Errors") {
+  info(DESC, "Get Errors state")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getERRSTR Arroyo1")
+  field(SCAN, "1 second")
+}
+
+record(ai, "$(S):$(TA):$(DN):ErrorsInt") {
+  info(DESC, "Get Errors Int")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getERRINT Arroyo1")
+  field(SCAN, "1 second")
+}
+
+
+
+record(ai, "$(S):$(TA):$(DN):getCurrent") {
+  info(DESC, "Get Current")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getITE Arroyo1")
+  field(SCAN, "1 second")
+  field(PREC,"3")
+  field(EGU, "A")
+}
+
+record(ai, "$(S):$(TA):$(DN):getVoltage") {
+  info(DESC, "Get Voltage")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getV Arroyo1")
+  field(SCAN, "1 second")
+  field(PREC,"3")
+  field(EGU, "V")
+}
+
+record(ai, "$(S):$(TA):$(DN):getTemp") {
+  info(DESC, "Get Temp")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getT Arroyo1")
+  field(SCAN, "1 second")
+  field(PREC,"3")
+  field(EGU, "C")
+  field(ASLO, "1")
+  field(AOFF, "0")
+  info(autosaveFields, "VAL ASLO AOFF")
+}
+
+
+record(mbbi, "$(S):$(TA):$(DN):getMode") {
+  info(DESC, "Get Mode")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getMode Arroyo1")
+  field(SCAN, "1 second")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(ZRST, "T")
+  field(ONST, "R")
+  field(TWST, "ITE")
+}
+
+
+record(ao, "$(S):$(TA):$(DN):WriteHiTLimit") {
+  info(DESC, "Set High Setpoint Limit")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(OUT, "@arroyo.proto WriteHiTempLimit Arroyo1")
+  field(PREC,"0")
+  field(EGU, "C")
+  info(autosaveFields, "VAL")
+  field(ASG, "BEAMLINE")
+}
+
+record(ao, "$(S):$(TA):$(DN):WriteLoTLimit") {
+  info(DESC, "Set Low Setpoint Limit")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(OUT, "@arroyo.proto WriteLoTempLimit Arroyo1")
+  field(PREC,"0")
+  field(EGU, "C")
+  info(autosaveFields, "VAL")
+  field(ASG, "BEAMLINE")
+}
+
+record(ao, "$(S):$(TA):$(DN):WriteILimit") {
+  info(DESC, "Set Current Limit")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(OUT, "@arroyo.proto WriteILimit Arroyo1")
+  field(PREC,"0")
+  field(EGU, "A")
+  info(autosaveFields, "VAL")
+  field(ASG, "BEAMLINE")
+}
+
+
+record(ao, "$(S):$(TA):$(DN):SetPoint"){
+   field(PREC,"3")
+   field(EGU, "C")
+   field(DRVH, "100")
+   field(DRVL, "-100")
+   field(HOPR, "100")
+   field(LOPR, "-100")
+   field(ASG, "ALWAYS")
+   info(archive, "Monitor, 00:01:00")
+   info(autosaveFields, "VAL DRVH DRVL HOPR LOPR")
+   field(FLNK, "$(S):$(TA):$(DN):WriteSetPoint")
+}
+
+
+record(calcout, "$(S):$(TA):$(DN):WriteSetPoint") {
+   field(DESC, "Write SetPoint")
+   field(INPA, "$(S):$(TA):$(DN):SetPoint")
+   field(CALC, "A*B+C")
+   field(DTYP, "stream")
+   field(OUT, "@arroyo.proto WriteSetPoint Arroyo1")
+   field(PREC,"3")
+   field(EGU, "C")
+   field(ASG, "ALWAYS")
+   info(archive, "Monitor, 00:01:00")
+   info(autosaveFields, "VAL B C")
+}
+
+
+
+record(ai, "$(S):$(TA):$(DN):getSetPoint") {
+  info(DESC, "Get Setpoint")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getSetPoint Arroyo1")
+  field(SCAN, "1 second")
+  field(PREC,"2")
+  field(EGU, "C")
+}
+
+record(ai, "$(S):$(TA):$(DN):getHiTLimit") {
+  info(DESC, "Get High Temp Limit")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getHiTempLimit Arroyo1")
+  field(SCAN, "1 second")
+  field(PREC,"0")
+  field(EGU, "C")
+}
+
+
+record(ai, "$(S):$(TA):$(DN):getLoTLimit") {
+  info(DESC, "Get Low Temp Limit")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getLoTempLimit Arroyo1")
+  field(SCAN, "1 second")
+  field(PREC,"0")
+  field(EGU, "C")
+} 
+
+record(ai, "$(S):$(TA):$(DN):getILimit") {
+  info(DESC, "Get I Current Limit")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getILimit Arroyo1")
+  field(SCAN, "1 second")
+  field(PREC,"0")
+  field(EGU, "C")
+}
+
+
+
+record(bo, "$(S):$(TA):$(DN):WriteOutput") {
+  info(DESC, "Set Output")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(OUT, "@arroyo.proto WriteOutput Arroyo1")
+  info(autosaveFields, "VAL")
+  field(ASG, "ALWAYS")
+}
+
+
+
+record(bi, "$(S):$(TA):$(DN):getOutput") {
+  info(DESC, "get Output")
+  info(archive, "Monitor, 00:01:00")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getOutput Arroyo1")
+  field(SCAN, "1 second")
+  field(ZNAM, "Off")
+  field(ONAM, "On")
+}
+
+####################################################################
+#Alarm Handling
+#Enable the alarm reporting 
+record(bo, "$(S):$(TA):$(DN):WriteErrorReport") {
+  info(DESC, "Enable Error Status")
+  field(DTYP, "stream")
+  field(OUT, "@arroyo.proto WriteEnableCond Arroyo1")
+  field(VAL, "1")
+  field(PINI, "YES")
+  field(ASG, "ALWAYS")
+}
+
+
+#Get the condition
+record(mbbiDirect, "$(S):$(TA):$(DN):getCondition") {
+  info(DESC, "Get Peltier Condition")
+  field(DTYP, "stream")
+  field(INP, "@arroyo.proto getCondition Arroyo1")
+  field(SCAN, "1 second")
+  field(FLNK, "$(S):$(TA):$(DN):GlobalAlarm")
+  info(archive, "Monitor, 00:01:00, VAL B0 B1 B2 B3 B4 B5 B6 B7 B9 B12")
+
+}
+
+
+#handle the alarm enable disable
+record(bo, "$(S):$(TA):$(DN):AlarmDisable")
+{
+    field(DESC, "Disable Global Alarm")
+    field (ZNAM, "AlarmDisabled")
+    field (ONAM, "AlarmEnabled")
+    field (ZSV, "MINOR")
+    info(archive, "Monitor, 00:01:00")
+    field (PINI, "YES")
+    field (VAL, "0")
+    field(ASG, "ALWAYS")
+}
+
+#global Alarm
+record(calc, "$(S):$(TA):$(DN):GlobalAlarm")
+{
+  field(INPA, "$(S):$(TA):$(DN):AlarmDisable")
+  field(INPB, "$(S):$(TA):$(DN):getCondition.B0")   #Current Limit
+  field(INPC, "$(S):$(TA):$(DN):getCondition.B1")   #Voltage Limit
+  field(INPD, "$(S):$(TA):$(DN):getCondition.B2")   #Sensor Limit
+  field(INPE, "$(S):$(TA):$(DN):getCondition.B3")   #Temp High Limit
+  field(INPF, "$(S):$(TA):$(DN):getCondition.B4")   #Tem Low Limit
+  field(INPG, "$(S):$(TA):$(DN):getCondition.B5")   #Sensor Shorted
+  field(INPH, "$(S):$(TA):$(DN):getCondition.B6")   #Sensor Open
+  field(INPI, "$(S):$(TA):$(DN):getCondition.B7")   #Tec Open Circuit
+  field(INPJ, "$(S):$(TA):$(DN):getCondition.B9")   #Out of Tolerance
+  field(INPK, "$(S):$(TA):$(DN):getCondition.BC")  #Thermal Run Away
+  field(CALC, "A&(B|C|D|E|F|G|H|I|K)")
+  field(HIHI, "1")
+  field(HHSV, "MAJOR")
+  info(archive, "Monitor, 00:01:00")
+
+}
+
+
+
+

@@ -1,0 +1,122 @@
+##################################################
+# General Settings
+##################################################
+
+Terminator = CR;
+ReplyTimeout = 1000;
+locktimeout = 5000;
+readtimeout  = 1000;
+extrainput   = Ignore;
+
+
+###################################################
+# Get functions
+###################################################
+
+# Read IDN from Arroyo
+getIDN {
+   out "*IDN?";
+   in "%s";
+}
+
+
+# Read Error String 
+getERRSTR {
+   out "ERRSTR?";
+   in "%s";
+}
+
+# Read Error int
+getERRINT {
+   out "ERRors?";
+   in "%i%*s";
+}
+
+# Read Error Condition
+getCondition {
+   out "TEC:COND?";
+   in "%i";
+}
+
+
+WriteEnableCond{
+   out "TEC:ENAB:COND %i";
+}
+
+
+WriteSetPoint{
+   out "TEC:T %.2f";
+#   in "%f";
+}
+
+getSetPoint{
+   out "TEC:SET:T?";
+   in "%f";
+}
+
+getLoTempLimit{
+   out "TEC:LIM:TLO?";
+   in "%f";
+}
+
+getHiTempLimit{
+   out "TEC:LIM:THI?";
+   in "%f";
+}
+
+getILimit{
+   out "TEC:LIM:ITE?";
+   in "%f";
+}
+
+
+
+WriteLoTempLimit{
+   out "TEC:LIM:TLO %.2f";
+}
+
+WriteHiTempLimit{
+   out "TEC:LIM:THI %.2f";
+}
+
+WriteILimit{
+   out "TEC:LIM:ITE %.2f";
+}
+
+
+WriteOutput{
+   out "TEC:OUT %i";
+}
+
+getOutput{
+   out "TEC:OUT?";
+   in "%i";
+}
+
+getMode{
+   out "TEC:MODE?";
+   in "%{T|R|ITE}";
+}
+
+
+getITE{
+   out "TEC:ITE?";
+   in "%f";
+}
+
+getV{
+   out "TEC:V?";
+   in "%f";
+}
+
+
+getT{
+   out "TEC:T?";
+   in "%f";
+}
+
+
+
+
+
+

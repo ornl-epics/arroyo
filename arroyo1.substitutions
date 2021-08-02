@@ -1,0 +1,14 @@
+file Arroyo.template
+{
+pattern {S, TA, DN}
+        {BL1A, SE, Arroyo}
+}
+
+
+file putCallback.template
+{
+   pattern { P, C, EGU, OUT, IN, TOL, TO, ST }
+   { BL1A:SE:ArroyoCB, SP, C, BL1A:SE:Arroyo:SetPoint, BL1A:SE:Arroyo:getTemp, 1.0, 28800, 60 }
+}
+
+
